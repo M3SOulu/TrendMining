@@ -1,0 +1,15 @@
+Scripts
+
+1) Input - Pull out data from different sources
+- Current support Scopus (GetScopusData.R and FunctionsScopusApi.R)
+- Plans: StackOverFlow, Twitter
+
+2) Output
+Word clouds (Wordcloud.R)
+Text mining basics (DtmAndDendogramClustering.R)
+Document Clustering (DtmAndDendogramClustering.R)
+Dissimilarity Clouds (ComparisonCloud.R)
+LDA clustering for exploring (InteractiveLdaCluster.R)
+LDA clustering for trend mining (BuildOptimalLdaModel.R + AnalyzeOptimalLdaModel.R)
+
+Maybe later: Trends Over Years (requires input and normalization)
