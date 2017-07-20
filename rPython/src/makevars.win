@@ -1,0 +1,2 @@
+PKG_LIBS=-LC:/python27/libs -lpython27
+PKG_CFLAGS=-I"C:/Python27/include"
