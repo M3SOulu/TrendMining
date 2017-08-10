@@ -1,16 +1,28 @@
 rm(list = ls())
-setwd('C:/Users/mmantyla/Dropbox/Teach/2017_Trends')
-setwd('D:/Dropbox/Teach/2017_Trends')
+#setwd('C:/Users/mmantyla/Dropbox/Teach/2017_Trends')
+#setwd('D:/Dropbox/Teach/2017_Trends')
+
 load ("my_articles_clean.RData")
+load ("stackoverflow_articles_clean.RData")
+load ("twitter_articles_clean.RData")
+
+install.packages("tm")
+install.packages("NLP")
+install.packages("magrittr")
+install.packages("slam")
+install.packages("topicmodels")
 
 #Articles with NA dates cause false analysis later kick them out
 my_articles <- my_articles[which(!is.na(my_articles$Date)),]
-my_text <- paste (my_articles$Title, my_articles$Abstract_clean)
+my_text <- paste (my_articles$Title_clean, my_articles$Abstract_clean)
 removeSpecialChars <- function(x) gsub("[^a-zA-Z0-9 ]","",x)
 my_text <- removeSpecialChars(my_text)
 my_text <- removeWords(my_text,c(stopwords("english")))
-library("tm")
-library("magrittr")
+
+library(NLP)
+library(tm)
+library(magrittr)
+
 #Terms must be more than 2 characters and appear 3 or more times
 dtm <- my_text %>% VectorSource %>% Corpus %>% DocumentTermMatrix (.,  control = list(wordLengths = c(2, Inf), bounds = list(global = c(3,Inf)))) 
 
@@ -19,7 +31,8 @@ dtm <- my_text %>% VectorSource %>% Corpus %>% DocumentTermMatrix (.,  control =
 #source: http://cran.r-project.org/web/packages/topicmodels/vignettes/topicmodels.pdf
 #Own experience: LDA is much faster 1.3s/iter -> 0.3s/iter or 0.2s/iter
 dim(dtm)
-library("slam")
+library(slam)
+
 summary(col_sums(dtm))#Word frequencies
 summary(row_sums(dtm))#Text lenghts
 
@@ -58,7 +71,7 @@ library("topicmodels")
 
 source ("mclapply.hack.R")
 #sequ <- seq(20, 520, 100)    #
-sequ <- seq(50, 150, 25)    #
+sequ <- seq(20, 80, 1)    
 #sequ <- seq(50, 250, 25)    #
 #sequ <- seq(75, 140, 5)    #
 #sequ <- seq(80, 130, 1)    #
@@ -74,7 +87,10 @@ hm_many <- lapply(fitted_many, function(L)  L@loglikelihood)
 hm_many <- unlist(lapply(fitted_many, function(L)  L@loglikelihood))
 
 # compute harmonic means
+#install.packages("Rmpfr")
+
 library("Rmpfr")
+
 plot(sequ, hm_many, type = "l")
 
 # compute optimum number of topics

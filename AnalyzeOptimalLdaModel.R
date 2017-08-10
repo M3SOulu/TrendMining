@@ -1,6 +1,7 @@
 rm(list = ls())
 setwd('C:/Users/mmantyla/Dropbox/Teach/2017_Trends')
 setwd('D:/Dropbox/Teach/2017_Trends')
+
 load ("my_articles_clean2.RData")
 
 load(paste("LDAWinner", ".RData", sep=""))
@@ -23,11 +24,11 @@ my_articles2$Years <- as.numeric(format(my_articles2$Date, "%Y"))
 
 #List top ten terms for all topics
 Terms[1:10,]
-#Study one topic (89)
-Terms[1:10,89]
+#Study one topic (23)
+Terms[1:10,23]
 
 #List all papers for topic 1
-my_articles2$Title[Topics==89]
+my_articles2$Title[Topics==23]
 my_articles2$Abstract[Topics==82]
 my_articles2$Abstract_clean[Topics==82]
 
@@ -48,7 +49,15 @@ Titles[Topics==which.min(medians)]
 
 #Density plots 
 #Test Plot all. Note: Unreadable for humans
+#install.packages("ggplot2")
+install.packages('rlang', dependencies = TRUE)
+install.packages('Rcpp', dependencies = TRUE)
+install.packages('ggplot2', dependencies = TRUE)
+library(rlang)
+library(Rcpp)
 library(ggplot2)
+
+
 qplot(as.numeric(Years), colour=factor(Topics),  geom="density")
 
 # Test Plot hot vs. cold
