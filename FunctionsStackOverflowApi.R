@@ -1,18 +1,18 @@
-install.packages("httr")
+#install.packages("httr", dependencies = TRUE)
 library(httr)
 
-install.packages("xml2")
+#install.packages("xml2", dependencies = TRUE)
 library(xml2)
 
-install.packages("urltools")
+#install.packages("urltools", dependencies = TRUE)
 library(urltools)
 
-install.packages("anytime")
+#install.packages("anytime", dependencies = TRUE)
 library(anytime)
 
 get_stackoverflow_data <- function (query_string){
 api_key = '9raZ36FkYGFHDSNrW)gdsw(('
-search_string = "Robot Operating System"
+search_string = query_string
 api_url = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=activity&q='
 
 api_url = paste(api_url, search_string, sep = '', collapse = '')
