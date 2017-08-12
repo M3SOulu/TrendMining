@@ -1,6 +1,7 @@
 rm(list = ls())
-setwd('C:/Users/mmantyla/Dropbox/Teach/2017_Trends')
-setwd('D:/Dropbox/Teach/2017_Trends')
+
+#setwd('C:/Users/mmantyla/Dropbox/Teach/2017_Trends')
+#setwd('D:/Dropbox/Teach/2017_Trends')
 
 load ("my_articles_clean2.RData")
 
@@ -105,13 +106,13 @@ theta <- posterior(LDAWinner)$topics
 #**************************************************************
 #year_limiter = (Years > 1978 & Years < 2015)
 #year_limiter = (Years > 1980 & Years < 1990)
-#year_limiter = Years >= 2007
-#Years = Years[year_limiter]
-#years <- levels(factor(unlist(Years)))
+year_limiter = Years >= 2007
+Years = Years[year_limiter]
+years <- levels(factor(unlist(Years)))
 
 topics_n <- LDAWinner@k
 theta <- posterior(LDAWinner)$topics
-#theta = theta[year_limiter,]
+theta = theta[year_limiter,]
 getwd()
 library("xtable")
 source ("thesis_R/C13_trends-table-year-frequencies.R")
