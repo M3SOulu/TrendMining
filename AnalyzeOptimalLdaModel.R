@@ -38,6 +38,7 @@ Titles <- my_articles2$Title
 Abstracts <- my_articles2$Abstract
 Cites <- my_articles2$Cites
 
+
 #Search for hot topic
 medians <- lapply(1:length(Terms[1,]), function(i) median(as.numeric(Years[Topics==i])))
 #The "Hottest topic"

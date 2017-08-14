@@ -18,19 +18,27 @@
 #python.method.call( "a", "split", " " )
 
 get_twitter_data <- function (query_string, path){
+  
   #twitter data extraction code
   system("python --version") #it should be 2.7
 
-  command_var = paste('python ',path, sep = '', collapse = '')
-  command_var = paste(command_var,'/Exporter.py --querysearch "', sep = '', collapse = '')
-  command_var = paste(command_var,query_string, sep = '', collapse = '')
-  command_var = paste(command_var,'" -- output "', sep = '', collapse = '')
-  command_var = paste(command_var, path, sep = '', collapse = '')
-  command_var = paste(command_var,'/output_got.csv"', sep = '', collapse = '')
+  file_path = paste('/output_got_',gsub(" ", "", query_string), sep = '', collapse = '')
+  file_path = paste(file_path,'.csv', sep = '', collapse = '')
   
-  #system('python G:/GetOldTweets-python-master/Exporter.py --querysearch "Robot Operating System" --output "G:/GetOldTweets-python-master/output_got.csv"')
+  command_var <- paste('python ' ,path, sep = '', collapse = '')
+  command_var <- paste(command_var,'/Exporter.py --querysearch "', sep = '', collapse = '')
+  command_var <- paste(command_var,query_string, sep = '', collapse = '')
+  command_var <- paste(command_var,'" --output "', sep = '', collapse = '')
+  command_var <- paste(command_var, path, sep = '', collapse = '')
+  command_var <- paste(command_var, file_path, sep = '', collapse = '')
+  command_var <- paste(command_var, '"', sep = '', collapse = '')
+  
+  #command_var_test <- 'python G:/GetOldTweets-python-master/Exporter.py --querysearch "Robot Framework" --output "G:/GetOldTweets-python-master/output_got_framework.csv"'
+  #system(command_var_test)
+ 
   system(command_var)
-  csv_var = paste(path,'/output_got.csv', sep = '', collapse = '')
+  
+  csv_var = paste(path, file_path, sep = '', collapse = '')
   data <- read.csv(csv_var, sep=";", header=T)
 
   return_data_frame  = data.frame()

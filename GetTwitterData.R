@@ -9,11 +9,11 @@ path = "G:/GetOldTweets-python-master"
 
 # python installed on the local machine should be 2.7 version
 query_string = "Robot Framework"
-#query_string = "Test Automation"
+query_string = "Test Automation"
 #query_string = "Selenium"
 
 my_articles <- get_twitter_data (query_string, path)
-# this will take time around 5-10 mins depending on the data
+# this will take time around 15-20 mins depending on the data
 
 
 abstract <- my_articles$Abstract
@@ -43,7 +43,7 @@ title <- gsub("T"," ",title)
 
 #Add cleaned abstracts as a new column. We could also replace the existing but debugging is easier if we keep both. 
 my_articles$Abstract_clean <- tolower(abstract)
-my_articles$Title_clean <- tolower (title)
+my_articles$Title <- tolower (title)
 
 #Date is character covert to Date objec
 my_articles$Date <- as.Date(my_articles$Date)

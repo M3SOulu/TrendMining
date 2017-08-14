@@ -11,6 +11,7 @@ library(urltools)
 library(anytime)
 
 get_stackoverflow_data <- function (query_string){
+  
 api_key = '9raZ36FkYGFHDSNrW)gdsw(('
 search_string = query_string
 api_url = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=activity&q='
@@ -60,7 +61,7 @@ repeat{
                        AuthorId= ifelse(is.null(data$items[[outerloop]]$owner$user_id),0,data$items[[outerloop]]$owner$user_id), 
                        Date= ifelse(is.null(date),0,as.character(date)),
                        AuthorName= ifelse(is.null(data$items[[outerloop]]$owner$display_name),'',data$items[[outerloop]]$owner$display_name),
-                       Views = ifelse(is.null(data$items[[outerloop]]$view_count),0,data$items[[outerloop]]$view_count),
+                       Cites = ifelse(is.null(data$items[[outerloop]]$view_count),0,data$items[[outerloop]]$view_count),
                        Abstract= ifelse(is.null(data$items[[outerloop]]$body),'',data$items[[outerloop]]$body),
                        stringsAsFactors=F)
       

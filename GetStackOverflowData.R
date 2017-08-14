@@ -3,10 +3,10 @@ rm(list = ls())
 source("G:/EMSE-Masters/Oulu University - Finland/Internship/project/TrendMining/FunctionsStackOverflowApi.R")
 
 query_string = "Robot Framework"
-#query_string = "Test Automation"
-#query_string = "Selenium"
+query_string = "Test Automation"
+query_string = "Selenium"
 
-my_articles <- get_stackoverflow_data (query_string)
+my_articles <- get_stackoverflow_data(query_string)
 
 abstract <- my_articles$Abstract
 abstract <- gsub("<.*?>", "", abstract)

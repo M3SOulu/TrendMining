@@ -14,7 +14,7 @@ install.packages("topicmodels")
 
 #Articles with NA dates cause false analysis later kick them out
 my_articles <- my_articles[which(!is.na(my_articles$Date)),]
-my_text <- paste (my_articles$Title_clean, my_articles$Abstract_clean)
+my_text <- paste (my_articles$Title, my_articles$Abstract_clean)
 removeSpecialChars <- function(x) gsub("[^a-zA-Z0-9 ]","",x)
 my_text <- removeSpecialChars(my_text)
 my_text <- removeWords(my_text,c(stopwords("english")))
@@ -45,7 +45,7 @@ zero_term_docs = row_sums(dtm) > 0
 dtm <- dtm[zero_term_docs,]
 
 my_articles2 <- my_articles[zero_term_docs,]
-save(my_articles2, file="my_articles_clean3.RData")
+save(my_articles2, file="my_articles_clean2.RData")
 summary(col_sums(dtm))
 dim(dtm)
 #Correct number of topics---------------------------------------------------------
@@ -70,12 +70,12 @@ library("topicmodels")
 #****************************************************************************
 
 source ("mclapply.hack.R")
-sequ <- seq(20, 520, 100)    #
+sequ <- seq(2, 520, 100)    #
 #sequ <- seq(20, 80, 1)    
 #sequ <- seq(50, 250, 25)    #
 #sequ <- seq(75, 140, 5)    #
 #sequ <- seq(80, 130, 1)    #
-sequ <- seq(70, 80, 1) 
+sequ <- seq(0, 50, 1) 
 
 #First line for testing with small data
 #system.time(fitted_many <- lapply(sequ, function(k) LDA(dtm[21:200,], k = k, method = "Gibbs",control = list(burnin = burnin, iter = iter, thin=thin))))
