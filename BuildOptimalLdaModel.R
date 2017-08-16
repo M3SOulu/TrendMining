@@ -75,7 +75,7 @@ sequ <- seq(2, 520, 100)    #
 #sequ <- seq(50, 250, 25)    #
 #sequ <- seq(75, 140, 5)    #
 #sequ <- seq(80, 130, 1)    #
-sequ <- seq(0, 50, 1) 
+sequ <- seq(80, 120, 1) 
 
 #First line for testing with small data
 #system.time(fitted_many <- lapply(sequ, function(k) LDA(dtm[21:200,], k = k, method = "Gibbs",control = list(burnin = burnin, iter = iter, thin=thin))))
