@@ -1,51 +1,80 @@
-setwd('G:/EMSE-Masters/Oulu University - Finland/Internship/project/TrendMining')
+#install.packages("rJava", dependencies = TRUE)
+library(rJava)
 
-rm(list = ls())
-source("G:/EMSE-Masters/Oulu University - Finland/Internship/project/TrendMining/FunctionsTwitterApi.R")
+source("FunctionsTwitterApi.R")
 
-#this requires a python project, o first download the git project into a local folder
-# give its path here
-path = "G:/GetOldTweets-python-master"
+#SET CORRECT path to the folder "GetOldTweets-java-master/"
+getoldtweets_path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java-master/"
 
-# python installed on the local machine should be 2.7 version
-query_string = "Robot Framework"
-query_string = "Test Automation"
-#query_string = "Selenium"
+#For example
+#app_path => set path to your project folder
+#query_string = "#jenkins"
+#my_filename = "jenkins"
 
-my_articles <- get_twitter_data (query_string, path)
-# this will take time around 15-20 mins depending on the data
+get_MyTwitterData = function (app_path, query_string, my_filename) {
 
+  #This will take time around 5-10 mins depending on the data 
+  my_articles = get_twitter_data(query_string, getoldtweets_path)
 
-abstract <- my_articles$Abstract
-title <- my_articles$Title
+  #save(my_articles, file="data/my_Twitter_articles_dirty.RData")
+  if (is.factor(my_articles$Abstract))
+    my_articles$Abstract = levels(my_articles$Abstract)[my_articles$Abstract]
+  
+  abstract = my_articles$Abstract
+  title <- my_articles$Title
 
-abstract <- gsub("#", " ", abstract)
-abstract <- gsub("&amp", " ", abstract)
-abstract <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", " ", abstract)
-abstract <- gsub("@\\w+", "", abstract)
-abstract <- gsub("[[:punct:]]", " ", abstract)
-abstract <- gsub("[[:digit:]]", " ", abstract)
-abstract <- gsub("http\\w+", " ", abstract)
+  #Hashtags
+  abstract = gsub("#", " ", abstract)
+  abstract = gsub("(http|https)[://][^ ]*", " ", abstract)
+  abstract = gsub("@.*? ", " ", abstract)
+  abstract = gsub("@.*", " ", abstract)
+  abstract = gsub("[[:punct:]]", " ", abstract)
+  abstract = gsub("[\'\"/.,-:;!=%~*]", " ", abstract)
+  abstract = gsub("[.]", " ", abstract)
+  abstract = gsub("[ \t]{2,}", " ", abstract)
+  chartr("åäáàâãöóòôõúùûüéèíìïëêñý", "aaaaaaooooouuuueeiiieeny", abstract)
+ 
+  #Text
+  title = gsub("#", " ", title)
+  title = gsub("(http|https)[://][^ ]*"," ",title)
+  title = gsub("@.*? ", " ", title)
+  title = gsub("@.*", " ", title)
+  title = gsub("[[:punct:]]", " ", title)
+  title = gsub("[\'\"/.,-:;!=%~*]", " ", title)
+  title = gsub("[.]", " ", title)
+  title = gsub("[ \t]{2,}", " ", title)
+  chartr("åäáàâãöóòôõúùûüéèíìïëêñý", "aaaaaaooooouuuueeiiieeny", title)
+  
+  if (is.factor(my_articles$AuthorName))
+    my_articles$AuthorName = levels(my_articles$AuthorName)[my_articles$AuthorName]
+  
+  if (is.factor(my_articles$Cites)) {
+    my_articles$Cites = levels(my_articles$Cites)[my_articles$Cites]
+    my_articles$Cites = as.numeric(my_articles$Cites)
+    my_articles$Cites[is.na(my_articles$Cites)] = 0
+  }
+  
+  if (is.factor(my_articles$Id)){
+    my_articles$Id = levels(my_articles$Id)[my_articles$Id]
+    my_articles$Id = as.numeric(my_articles$Id)
+    my_articles$Id[is.na(my_articles$Id)] = 0
+  }  
+  
+  #Add cleaned abstracts as a new column. 
+  #We could also replace the existing but debugging is easier if we keep both. 
+  my_articles$Abstract_clean = tolower(abstract)
+  my_articles$Title = tolower(title)
 
+  #Date is character covert to Date objec
+  my_articles$Date = as.Date(my_articles$Date)
 
-title <- gsub("&amp", " ", title)
-title <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", " ", title)
-title <- gsub("@\\w+", " ", title)
-title <- gsub("[[:punct:]]", " ", title)
-title <- gsub("[[:digit:]]", " ", title)
-title <- gsub("http\\w+", " ", title)
-title <- gsub("[ \t]{2,}", " ", title)
-title <- gsub("^\\s+|\\s+$", " ", title) 
-title <- gsub("â???~"," ",title)
-title <- gsub("â???"," ",title)
-title <- gsub("T"," ",title)
-
-
-#Add cleaned abstracts as a new column. We could also replace the existing but debugging is easier if we keep both. 
-my_articles$Abstract_clean <- tolower(abstract)
-my_articles$Title <- tolower (title)
-
-#Date is character covert to Date objec
-my_articles$Date <- as.Date(my_articles$Date)
-
-save(my_articles, file="twitter_articles_clean.RData")
+  #Fixed filename: data/my_twitter_<xxx>_data.RData
+  my_file = app_path
+  my_file = paste(my_file, "data/my_twitter_", sep="", collapse=" ")
+  my_file = paste(my_file, my_filename, sep="", collapse=" ")
+  my_file = paste(my_file, "_data.RData", sep="", collapse=" ")
+  
+  save(my_articles, file=my_file)
+ 
+  return(my_file)
+}
