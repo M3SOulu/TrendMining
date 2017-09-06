@@ -8,12 +8,16 @@ getoldtweets_path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java
 
 #Have a sub-folder "data" to your project folder (where the project scripts are)
 #For example
-#app_path => set path to your project folder (e.g. use getwd())
+#app_path => set path to your project folder (e.g. use getwd()) - if null, the current work directory will be used
 #query_string = "#jenkins"
 #my_filename = "jenkins"
 
 get_MyTwitterData = function (app_path, query_string, my_filename) {
 
+  #Save working directory, in case tat is not provided
+  if (is.null(app_path))
+    original_app_path = getwd()
+  
   #This may take quite a long time, depending on the data 
   my_articles = get_twitter_data(query_string, getoldtweets_path)
 
@@ -68,9 +72,12 @@ get_MyTwitterData = function (app_path, query_string, my_filename) {
 
   #Date is character covert to Date objec
   my_articles$Date = as.Date(my_articles$Date)
+  
+  #Change back to original working directory
+  ifelse(is.null(app_path), setwd(original_app_path), setwd(app_path))
 
   #Fixed filename: /data/my_twitter_<xxx>_data.RData
-  my_file = app_path
+  my_file = ifelse(!is.null(app_path), app_path, original_app_path)
   my_file = paste(my_file, "/data/my_twitter_", sep="", collapse=" ")
   my_file = paste(my_file, my_filename, sep="", collapse=" ")
   my_file = paste(my_file, "_data.RData", sep="", collapse=" ")
