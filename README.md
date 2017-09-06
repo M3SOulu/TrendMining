@@ -5,8 +5,8 @@ Scripts
 1) Input - Pull out data from different sources
 - Current support 
 	Scopus (GetScopusData.R and FunctionsScopusApi.R)
-	Scopus (GetStackOverflowData.R and FunctionsStackOverflowApi.R)
-	Scopus (GetTwitterData.R and FunctionsTwitterApi.R)	
+	StackOverflow (GetStackOverflowData.R and FunctionsStackOverflowApi.R)
+	Twitter (GetTwitterData.R and FunctionsTwitterApi.R)	
 
 When using function interfaces to fetch the data (get_ScopusData, get_stackOverFlowData & get_MyTwitterData)
 - Have a sub-directory "data"
