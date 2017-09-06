@@ -1,59 +1,55 @@
-# devtool required for manual install
-# rpython package for windows not available on cran download
-#install.packages("devtools")
+#install.packages("devtools", dependencies = TRUE)
 #library(devtools)
+#install.packages("rJava", depdendencies = TRUE)
+#library(rJava)
 
-# Download zip file and uncompress, detailed instructions available in the text file
-#Add the path for rpyhton folder here
-#install("G:/EMSE-Masters/Oulu University - Finland/Internship/project/TrendMining/rPython")
-#library(rPython)
-
-# Example code to test rpython 
-#python.call( "len", 1:3 )
-#a <- 1:4
-#b <- 5:8
-#python.exec( "import got" )
-#python.call( "concat", a, b)
-#python.assign( "a",  "hola hola" )
-#python.method.call( "a", "split", " " )
+#Path to the directory "GetOldTweets-java-master"
+#path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java-master"
 
 get_twitter_data <- function (query_string, path){
   
-  #twitter data extraction code
-  system("python --version") #it should be 2.7
+  #Start the JVM
+  .jinit('.')
+  .jaddClassPath(path)
+  
+  #For selecting a date range
+  #from_date = "2010-01-01"
+  #to_date = "2017-07-31"
+  
+  #Set the directory for creating the output file
+  setwd(path)
 
-  file_path = paste('/output_got_',gsub(" ", "", query_string), sep = '', collapse = '')
-  file_path = paste(file_path,'.csv', sep = '', collapse = '')
-  
-  command_var <- paste('python ' ,path, sep = '', collapse = '')
-  command_var <- paste(command_var,'/Exporter.py --querysearch "', sep = '', collapse = '')
-  command_var <- paste(command_var,query_string, sep = '', collapse = '')
-  command_var <- paste(command_var,'" --output "', sep = '', collapse = '')
-  command_var <- paste(command_var, path, sep = '', collapse = '')
-  command_var <- paste(command_var, file_path, sep = '', collapse = '')
-  command_var <- paste(command_var, '"', sep = '', collapse = '')
-  
-  #command_var_test <- 'python G:/GetOldTweets-python-master/Exporter.py --querysearch "Robot Framework" --output "G:/GetOldTweets-python-master/output_got_framework.csv"'
-  #system(command_var_test)
- 
-  system(command_var)
-  
-  csv_var = paste(path, file_path, sep = '', collapse = '')
-  data <- read.csv(csv_var, sep=";", header=T)
+  command = "java -jar got.jar querysearch="
+  command = paste(command, query_string, sep = "", collapse = '')
 
+  #For a date range
+  #command = paste(command, " since=", sep = "", collapse = '')
+  #command = paste(command, from_date, sep = "", collapse = '')
+  #command = paste(command, " until=", sep = "", collapse = '')
+  #command = paste(command, to_date, sep = "", collapse = '')
+  
+  #For testing purposes, only
+  #command = paste(command, "maxtweets=10", sep = " ", collapse = '')
+
+  system(command)
+           
+  #Get the data    
+  csv_file = paste(path, "/output_got.csv", sep = '', collapse = '')
+  my_data = read.csv(csv_file, sep=";", header=TRUE, quote="")
+  
   return_data_frame  = data.frame()
-
-  for(outerloop in 1:nrow(data)){
-    temp <- data.frame(AuthorName = data$username[outerloop],
-                    Title = data$text[outerloop],
-                    Date = data$date[outerloop],
-                    Cites = data$retweets[outerloop],
-                    Abstract = data$hashtags[outerloop],
-                    Id = data$id[outerloop]
-                    )
   
+  for (tweet in 1:nrow(my_data)){
+    temp <- data.frame(
+              AuthorName = my_data$username[tweet],
+              Title = my_data$text[tweet],
+              Date = my_data$date[tweet],
+              Cites = my_data$retweets[tweet],
+              Abstract = my_data$hashtags[tweet],
+              Id = my_data$id[tweet]
+    )
+    
     return_data_frame <- rbind(return_data_frame, temp)
   }     
   return_data_frame
 }
-                               
