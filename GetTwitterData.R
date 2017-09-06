@@ -3,17 +3,18 @@ library(rJava)
 
 source("FunctionsTwitterApi.R")
 
-#SET CORRECT path to the folder "GetOldTweets-java-master/"
+#SET CORRECT path to the folder "GetOldTweets-java-master/", e.g. in my case that is...
 getoldtweets_path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java-master/"
 
+#Have a sub-folder "data" to your project folder (where the project scripts are)
 #For example
-#app_path => set path to your project folder
+#app_path => set path to your project folder (e.g. use getwd())
 #query_string = "#jenkins"
 #my_filename = "jenkins"
 
 get_MyTwitterData = function (app_path, query_string, my_filename) {
 
-  #This will take time around 5-10 mins depending on the data 
+  #This may take quite a long time, depending on the data 
   my_articles = get_twitter_data(query_string, getoldtweets_path)
 
   #save(my_articles, file="data/my_Twitter_articles_dirty.RData")
@@ -68,9 +69,9 @@ get_MyTwitterData = function (app_path, query_string, my_filename) {
   #Date is character covert to Date objec
   my_articles$Date = as.Date(my_articles$Date)
 
-  #Fixed filename: data/my_twitter_<xxx>_data.RData
+  #Fixed filename: /data/my_twitter_<xxx>_data.RData
   my_file = app_path
-  my_file = paste(my_file, "data/my_twitter_", sep="", collapse=" ")
+  my_file = paste(my_file, "/data/my_twitter_", sep="", collapse=" ")
   my_file = paste(my_file, my_filename, sep="", collapse=" ")
   my_file = paste(my_file, "_data.RData", sep="", collapse=" ")
   
