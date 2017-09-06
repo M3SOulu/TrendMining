@@ -11,15 +11,20 @@ source("Set_MyScopus_APIKey.R")
 #Please see restrictions: #https://dev.elsevier.com/api_key_settings.html
 #Trying the query first via Scopus web-interface is recommended
 
+#CREATE a sub-folder "data" to your project folder (where the project scripts are)
 #For example
-#app_path => set path to your project folder
-#query_string = "TITLE-ABS-KEY(\"Continuous Integration\" AND ALL('software testing')"
+#app_path => set path to your project folder (e.g. use getwd()) - if null, the current work directory will be used
+#query_string = "Continuous Integration"
 #my_filename = "ci"
 
 get_ScopusData = function(app_path, query_string, my_filename){
 
+  my_query_string = "TITLE-ABS-KEY(\""
+  my_query_string = paste(my_query_string, query_string, sep="")
+  my_query_string = paste(my_query_string, "\") AND ALL('software testing')", sep="")
+  
   #Get articles and save those - we do not want to re-run the query
-  my_articles = get_scopus_papers(query_string)
+  my_articles = get_scopus_papers(my_query_string)
   #save(my_articles, file="data/my_SCOPUS_articles_dirty.RData")
   #load ("data/my_SCOPUS_articles_dirty.RData")
 
@@ -46,9 +51,9 @@ get_ScopusData = function(app_path, query_string, my_filename){
   #Date is character convert to Date object
   my_articles$Date = as.Date(my_articles$Date)
   
-  #Fixed filename: data/my_scopus_<xxx>_data.RData
-  my_file = app_path
-  my_file = paste(my_file, "data/my_scopus_", sep="", collapse=" ")
+  #Fixed filename: /data/my_scopus_<xxx>_data.RData
+  my_file = ifelse(!is.null(app_path), app_path, getwd())
+  my_file = paste(my_file, "/data/my_scopus_", sep="", collapse=" ")
   my_file = paste(my_file, my_filename, sep="", collapse=" ")
   my_file = paste(my_file, "_data.RData", sep="", collapse=" ")
 
