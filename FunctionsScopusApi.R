@@ -18,10 +18,10 @@ get_scopus_papers_per_year = function (search_string, domain="software testing",
 }
 
 #For example
-#query_string = "TITLE-ABS-KEY(\"Continuous Integration\"
+#query_string = "TITLE-ABS-KEY(\"Continuous Integration\")"
   #query_string = paste(query_string, "AND ALL('software testing') AND YEAR (",year, ")")
   #query_string = paste(query_string, "AND ALL('software testing')")
-#query_string = "TITLE-ABS-KEY(\"Continuous Integration\" AND ALL('software testing')"
+#query_string = "TITLE-ABS-KEY(\"Continuous Integration\") AND ALL('software testing')"
 
 get_scopus_papers = function (query_string){
   
