@@ -26,6 +26,12 @@ source("GetScopusData.R")
 source("GetStackOverflowData.R")
 source("GetTwitterData.R")
 
+#For plotting
+source("ComparisonCloud.R")
+source("DtmAndDendogramClustering.R")
+source("WordCloud.R")
+source("InteractiveLdaCluster.R")
+
 #**************************
 #** STACKOVERFLOW API KEY
 #** Set your own StackOverflow API key here (or use the default below)
@@ -52,6 +58,7 @@ getoldtweets_path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java
 
 #**************************
 #** FETCHING DATA - At this point you may fetch data using the functions
+#** =============
 #**
 #** FOR EXAMPLE
 #**
@@ -75,5 +82,30 @@ getoldtweets_path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java
 #** >
 #**
 #** Please note that fetching the data may take a long time!
+#**
+#** 
+#** ANALYZING DATA
+#** ==============
+#**
+#** Use script file BuildOptimalLdaModel.R for finding the optimal model. Note that you
+#** may need to adjust the values for fitting the model (read the comments in the file). Also,
+#** note you have to provide the filename in the script file (or in the command line) for the
+#** data to be analyzed, e.g.
+#** > my_file = "my_STO_ci_data.RData"
+#**
+#** Use script file AnalyzeOptimalLdaModel.R - after creating the model (utilizing scripts
+#** in BuildOptimalLdaModel.R) for viewing topics and terms and plotting (hot & cold topics).
+#**
+#** You may plot word clouds with the following fucntions, please provide filename,
+#** > my_file = "my_STO_ci_data.RData"
+#** > draw_myWordCloud(my_file)
+#** > draw_ComparisonCloud(my_file)
+#** > draw_FourWayComparisonCloud(my_file)
+#**
+#** Interactive LDA CLuster
+#** > draw_my_IAMap(my_file)
+#**
+#** Dendogram pdf-file
+#** > my_DtmAndDendogramClusterFile(my_file)
 #**
 #**************************
