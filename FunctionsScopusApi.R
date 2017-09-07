@@ -17,7 +17,7 @@ get_scopus_papers_per_year = function (search_string, domain="software testing",
   papers_per_year
 }
 
-#For example
+#For example (case 1, 1a, 1b or 2)
 #query_string = "TITLE-ABS-KEY(\"Continuous Integration\")"
   #query_string = paste(query_string, "AND ALL('software testing') AND YEAR (",year, ")")
   #query_string = paste(query_string, "AND ALL('software testing')")
