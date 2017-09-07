@@ -1,11 +1,13 @@
 source("FunctionsStackOverflowApi.R")
 
+#query_string = string to be searched
+#my_filename = string to be used as a part of the filename
+
 #For example
-#app_path => set path to your project folder (e.g. use getwd()) - if null, the current work directory will be used
 #query_string = "jenkins"
 #my_filename = "jenkins"
 
-get_stackOverFlowData = function(app_path, query_string, my_filename) {
+get_stackOverFlowData = function(query_string, my_filename) {
 
   my_articles = get_stackoverflow_data(query_string)
 
@@ -30,7 +32,7 @@ get_stackOverFlowData = function(app_path, query_string, my_filename) {
   my_articles$LA_Date = as.Date(my_articles$LA_Date)
 
   #Fixed filename: data/my_STO_<xxx>_data.RData
-  my_file = ifelse(!is.null(app_path), app_path, getwd())
+  my_file = my_work_dir
   my_file = paste(my_file, "/data/my_STO_", sep="", collapse=" ")
   my_file = paste(my_file, my_filename, sep="", collapse=" ")
   my_file = paste(my_file, "_data.RData", sep="", collapse=" ")
