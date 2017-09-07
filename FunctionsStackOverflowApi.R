@@ -9,10 +9,6 @@ library(urltools)
 library(jsonlite)
 library(anytime)
 
-#Use  your own API key or the default below
-source("Get_MySTO_APIKey.R")
-#api_key = '9raZ36FkYGFHDSNrW)gdsw(('
-
 get_stackoverflow_data = function (query_string){
   
   filter_text = "withbody"
