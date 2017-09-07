@@ -20,11 +20,26 @@ For example...
 
 
 3) Output
+LDA clustering for trend mining (BuildOptimalLdaModel.R + AnalyzeOptimalLdaModel.R)
 Word clouds (Wordcloud.R)
 Text mining basics (DtmAndDendogramClustering.R)
 Document Clustering (DtmAndDendogramClustering.R)
 Dissimilarity Clouds (ComparisonCloud.R)
 LDA clustering for exploring (InteractiveLdaCluster.R)
-LDA clustering for trend mining (BuildOptimalLdaModel.R + AnalyzeOptimalLdaModel.R)
 
 Maybe later: Trends Over Years (requires input and normalization)
+
+For example...
+
+You may plot with the following fucntions, please provide filename, e.g.
+- > my_file = "my_STO_ci_data.RData"
+- > draw_myWordCloud(my_file)
+- > draw_ComparisonCloud(my_file)
+- > draw_FourWayComparisonCloud(my_file)
+
+- Interactive LDA CLuster
+- > draw_my_IAMap(my_file)
+
+- Dendogram pdf-file
+- > my_DtmAndDendogramClusterFile(my_file)
+
