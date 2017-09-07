@@ -1,23 +1,20 @@
 #install.packages("devtools", dependencies = TRUE)
-#library(devtools)
 #install.packages("rJava", depdendencies = TRUE)
-#library(rJava)
+library(devtools)
+library(rJava)
 
-#Path to the directory "GetOldTweets-java-master"
-#path = "K:/My Documents/Projects/TrendMining_2017/GetOldTweets-java-master"
-
-get_twitter_data <- function (query_string, path){
+get_twitter_data <- function (query_string){
   
   #Start the JVM
   .jinit('.')
-  .jaddClassPath(path)
+  .jaddClassPath(getoldtweets_path)
   
   #For selecting a date range
   #from_date = "2010-01-01"
   #to_date = "2017-07-31"
   
   #Set the directory for creating the output file
-  setwd(path)
+  setwd(getoldtweets_path)
 
   command = "java -jar got.jar querysearch="
   command = paste(command, query_string, sep = "", collapse = '')
@@ -34,7 +31,7 @@ get_twitter_data <- function (query_string, path){
   system(command)
            
   #Get the data    
-  csv_file = paste(path, "/output_got.csv", sep = '', collapse = '')
+  csv_file = paste(getoldtweets_path, "/output_got.csv", sep = '', collapse = '')
   my_data = read.csv(csv_file, sep=";", header=TRUE, quote="")
   
   return_data_frame  = data.frame()
