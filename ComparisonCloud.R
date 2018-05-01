@@ -5,29 +5,10 @@ library(magrittr)
 library(tm)
 library(wordcloud)
 
-my_stopwords = c(stopwords("english"),"able","add","also","although","app",
-                 "apps","application","applications","apply",
-                 "applied","applying","approach","arsenic","author","authors",
-                 "best","based","better","brazil","built","business",
-                 "can","case","class","classes","computer","could",
-                 "company","device","different","doesnt","drug",
-                 "early","entire","even","every",
-                 "file","find","florida","food","get","getting",
-                 "health","height","high","highly","however",
-                 "industry","insertion","insertions","introduction","know",
-                 "large","level","literature","local","making",
-                 "many","may","mice","much","naked","name","needs","new","null",
-                 "often","old","overview","paper","project","projects",
-                 "really","reading","river","run","running",
-                 "searched","seems","set",
-                 "several","similar","since","small","software",
-                 "softwaredevelopment","step","story","student","students","study","studies",
-                 "system","systems","team","teams","text","tell",
-                 "unable","update","updated","updating","usa","use","used","user","users","using",
-                 "versus","visit","vitamin","want","within","without","write","writing",
-                 "year","years","one","two","three","four","five","six","seven","eight")
-
-draw_ComparisonCloud = function(my_file){
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+#EDIT this row
+my_file <- "my_Scopus_TSE_articles_clean_data.RData"
+#draw_ComparisonCloud = function(my_file){
 
   my_temp_file = paste(my_data_dir, "/", sep="")
   my_temp_file = paste(my_temp_file, my_file, sep="")
@@ -51,7 +32,7 @@ draw_ComparisonCloud = function(my_file){
   all_titles = removeWords(all_titles, my_stopwords)
 
   tdm <- all_titles %>% VectorSource %>% Corpus %>% TermDocumentMatrix %>% as.matrix
-
+  #Here we split from the middle. We get two group one older and newer
   colnames(tdm) <- c (paste (">", as.character(median(my_articles_2$Date))), 
                   paste ("<=", as.character(median(my_articles_2$Date))))
                          
@@ -61,9 +42,9 @@ draw_ComparisonCloud = function(my_file){
 
   rm(my_articles_2)
   print("Finished comparison cloud")
-}
+#}
 
-draw_FourWayComparisonCloud = function(my_file){
+#draw_FourWayComparisonCloud = function(my_file){
 
   my_temp_file = paste(my_data_dir, "/", sep="")
   my_temp_file = paste(my_temp_file, my_file, sep="")
@@ -107,4 +88,4 @@ draw_FourWayComparisonCloud = function(my_file){
   
   print("FInished 4-Way Comparison cloud")
   
-}
+#}

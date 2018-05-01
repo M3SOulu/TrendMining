@@ -9,10 +9,8 @@ library(urltools)
 library(jsonlite)
 library(anytime)
 
-get_stackoverflow_data = function (query_string){
-  
-  filter_text = "withbody"
-  
+create_so_req_url <- function (filter_text)
+{
   #Search for items matching the query string from StackOverflow
   api_url = 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=activity&q='
   api_url = paste(api_url, query_string, sep = '', collapse = '')
@@ -20,8 +18,19 @@ get_stackoverflow_data = function (query_string){
   api_url = paste(api_url, filter_text, sep = '', collapse = '')
   api_url = paste(api_url, '&site=stackoverflow',sep = '', collapse = '')
   api_url = paste(api_url, '&key=', sep = '', collapse = '')
-  api_url = paste(api_url, api_key, sep = '', collapse = '')
+  api_url = paste(api_url, so_api_key, sep = '', collapse = '')
   
+}
+
+
+get_stackoverflow_data = function (query_string){
+  #get total
+  api_url_total <- create_so_req_url("total")
+  sample_total <- GET(URLencode(api_url_total))
+  content_total <- content(sample_total)
+  
+  #get data
+  api_url <- create_so_req_url("withbody")
   #Prepare the url and fetch the data
   api_url = URLencode(api_url)
 
@@ -37,7 +46,7 @@ get_stackoverflow_data = function (query_string){
   #while (length(my_data$items) > 0) {
   repeat {
     
-    print(paste("page number: ", page_number, sep = '', collapse = ''))
+    print(paste("page number: ", page_number, " items: ", page_number*30, " out of ", content_total$total, sep = '', collapse = ''))
 
     for (outerloop in 1:(length(my_data$items))) {
 
@@ -91,7 +100,7 @@ get_stackoverflow_data = function (query_string){
       api_url = paste(api_url, filter_text, sep = '', collapse = '')
       api_url = paste(api_url, '&site=stackoverflow',sep = '', collapse = '')
       api_url = paste(api_url, '&key=', sep = '', collapse = '')
-      api_url = paste(api_url, api_key, sep = '', collapse = '')
+      api_url = paste(api_url, so_api_key, sep = '', collapse = '')
       api_url = paste(api_url, '&page=', sep = '', collapse = '')
       api_url = paste(api_url, page_number, sep = '', collapse = '')
       

@@ -1,45 +1,22 @@
 # TrendMining
 Scripts
 
-1) Edit Initialize.R 
+1.) Edit and execute Initialize.R 
 - Set-up environment variables => work directory, path to GetOldTweets-java-master folder, StackOverflow API key & Scopus API key
-- Run the initialize script and you should see your data and functions as environment variables
-- source("Initialize.R")
+- Execute the file line by line (shortcut CTRL+Enter)
 
-
-2) Input - Pull out data from different sources
-Current support
-- Scopus: GetScopusData.R and FunctionsScopusApi.R
-- StackOverflow: GetStackOverflowData.R and FunctionsStackOverflowApi.R
-- Twitter: GetTwitterData.R and FunctionsTwitterApi.R
-
-For example...
-- get_ScopusData("jira", "jira") => file: data/my_scopus_jira_data.RData
-- get_stackOverFlowData("exploratory testing", "et") => file: data/my_STO_et_data.RData
-- get_TwitterData("#pairwisetesting","pwt") => file: data/my_twitter_pwt_data.RData
-
+2.) Input - Pull out data from different sources
+2.1)Open file GetScopusData.R and execute line by line fashion. Note in first run you need to uncomment early lines and install packages
+Observe different variables in the environment. There is also commented out skeleton for turning this into function. After successful execution you  a data file. 
+Please verify that the data file exists. 
+2.2) Do the same for GetStackOverflowData.R and GetTwitterData.R
+Function files that fetch the data should not need editing (FunctionsScopusApi.R, FunctionsStackOverflowApi.R, FunctionsTwitterApi.R)
+#TODO remove existing data files from root. Make data folder empty as well. Keep only "my_TSE_articles_dirty". 
 
 3) Output
-LDA clustering for trend mining (BuildOptimalLdaModel.R + AnalyzeOptimalLdaModel.R)
-Word clouds (Wordcloud.R)
-Text mining basics (DtmAndDendogramClustering.R)
-Document Clustering (DtmAndDendogramClustering.R)
-Dissimilarity Clouds (ComparisonCloud.R)
-LDA clustering for exploring (InteractiveLdaCluster.R)
-
-Maybe later: Trends Over Years (requires input and normalization)
-
-For example...
-
-You may plot with the following fucntions, please provide filename, e.g.
-- > my_file = "my_STO_ci_data.RData"
-- > draw_myWordCloud(my_file)
-- > draw_ComparisonCloud(my_file)
-- > draw_FourWayComparisonCloud(my_file)
-
-- Interactive LDA CLuster
-- > draw_my_IAMap(my_file)
-
-- Dendogram pdf-file
-- > my_DtmAndDendogramClusterFile(my_file)
-
+3.1) Start with text mining basics. File DtmAndDendogramClustering.R contains functionality for document clustering.  Execute it line by line fashion for all of your data sets. 
+3.2) Investigate Word clouds (Wordcloud.R) and Dissimilarity Clouds (ComparisonCloud.R)
+3.3) Plot timelines (Timelines.R) to see how your data behaves over time. You may also do additional statistical plots and test, e.g. does question/title length affect upvotes/retweets/cites
+3.4) Search for optimal LDA model (BuildOptimalLdaModel.R)
+3.5) Investigate the trends in the optimal LDA model (AnalyzeOptimalLdaModel.R)
+3.6) Do interactive LDA cluster exploration. Note: you might want to have less clusters (smaller k) than what is mathematically optimal (InteractiveLdaCluster.R). As exploring hundreds of clusters in screen is not very easy. 

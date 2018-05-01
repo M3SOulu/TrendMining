@@ -7,13 +7,16 @@ source("FunctionsTwitterApi.R")
 #my_filename = string to be used as a part of the filename
 
 #For example
-#query_string = "#jenkins"
-#my_filename = "jenkins"
+query_string = "#jenkins"
+my_filename = "jenkins"
 
-get_TwitterData = function (query_string, my_filename) {
+#get_TwitterData = function (query_string, my_filename) {
 
   #This may take quite a long time, depending on the data 
-  my_articles = get_twitter_data(query_string)
+  #You may test duration like this. Then compute how long it would take to get max tweets
+  #system.time(my_articles <- get_twitter_data(query_string, maxtweets=100))
+  #system.time(my_articles <- get_twitter_data(query_string, maxtweets=200))
+  my_articles <- get_twitter_data(query_string, maxtweets=6000)
 
   #save(my_articles, file="data/my_Twitter_articles_dirty.RData")
   if (is.factor(my_articles$Abstract))
@@ -31,7 +34,7 @@ get_TwitterData = function (query_string, my_filename) {
   abstract = gsub("[\'\"/.,-:;!=%~*]", " ", abstract)
   abstract = gsub("[.]", " ", abstract)
   abstract = gsub("[ \t]{2,}", " ", abstract)
-  chartr("åäáàâãöóòôõúùûüéèíìïëêñý", "aaaaaaooooouuuueeiiieeny", abstract)
+  abstract <- chartr("åäáàâãöóòôõúùûüéèíìïëêñý", "aaaaaaooooouuuueeiiieeny", abstract)
  
   #Text
   title = gsub("#", " ", title)
@@ -42,7 +45,7 @@ get_TwitterData = function (query_string, my_filename) {
   title = gsub("[\'\"/.,-:;!=%~*]", " ", title)
   title = gsub("[.]", " ", title)
   title = gsub("[ \t]{2,}", " ", title)
-  chartr("åäáàâãöóòôõúùûüéèíìïëêñý", "aaaaaaooooouuuueeiiieeny", title)
+  title <- chartr("åäáàâãöóòôõúùûüéèíìïëêñý", "aaaaaaooooouuuueeiiieeny", title)
   
   if (is.factor(my_articles$AuthorName))
     my_articles$AuthorName = levels(my_articles$AuthorName)[my_articles$AuthorName]
@@ -66,9 +69,7 @@ get_TwitterData = function (query_string, my_filename) {
 
   #Date is character covert to Date objec
   my_articles$Date = as.Date(my_articles$Date)
-  
-  #Change back to original working directory since GetOldTweets-java has changed that
-  setwd(my_work_dir)
+
 
   #Fixed filename: /data/my_twitter_<xxx>_data.RData
   my_file = my_work_dir
@@ -78,5 +79,5 @@ get_TwitterData = function (query_string, my_filename) {
   
   save(my_articles, file=my_file)
  
-  return(my_file)
-}
+#  return(my_file)
+#}

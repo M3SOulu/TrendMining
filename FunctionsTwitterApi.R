@@ -3,7 +3,7 @@
 library(devtools)
 library(rJava)
 
-get_twitter_data <- function (query_string){
+get_twitter_data <- function (query_string, maxtweets=100){
   
   #Start the JVM
   .jinit('.')
@@ -12,7 +12,7 @@ get_twitter_data <- function (query_string){
   #For selecting a date range
   #from_date = "2010-01-01"
   #to_date = "2017-07-31"
-  
+  old_wd <- getwd()
   #Set the directory for creating the output file
   setwd(getoldtweets_path)
 
@@ -26,7 +26,7 @@ get_twitter_data <- function (query_string){
   #command = paste(command, to_date, sep = "", collapse = '')
   
   #For testing purposes, only
-  #command = paste(command, "maxtweets=10", sep = " ", collapse = '')
+  command = paste(command, " maxtweets=", maxtweets, sep = "", collapse = '')
 
   system(command)
            
@@ -35,7 +35,8 @@ get_twitter_data <- function (query_string){
   my_data = read.csv(csv_file, sep=";", header=TRUE, quote="")
   
   return_data_frame  = data.frame()
-  
+  #reset the old working directory
+  setwd(old_wd)
   for (tweet in 1:nrow(my_data)){
     temp <- data.frame(
               AuthorName = my_data$username[tweet],

@@ -1,49 +1,55 @@
 #install.packages("tm", dependencies = TRUE)
 #install.packages("ggplot2", dependencies = TRUE)
 #install.packages("xtable", dependencies = TRUE)
-#install.packages("topicmodels", dependencies = TRUE)
+#install.packages("nnet", dependencies=TRUE)
+
 library(tm)
 library(ggplot2)
 library(xtable)
-library(topicmodels)
+library("text2vec")
+library("nnet") #Breaks ties at random when searching for max
+
+
+my_file = "my_Scopus_TSE_articles_clean_data.RData"
+#Articles. Make sure this is the same you used to build LDA model otherwise it will not make any sense
+my_temp_file = paste(my_data_dir, "/", sep="")
+my_temp_file = paste(my_temp_file, my_file, sep="")
+load(my_temp_file)
 
 #LDAWinner
 my_LDAWinner_file = paste(my_work_dir,  "/", sep="")
 my_LDAWinner_file = paste(my_LDAWinner_file, my_data_dir, sep="")
-my_LDAWinner_file = paste(my_LDAWinner_file, "/LDAWinner.RData", sep="")
-
-#No zero terms
-my_file = paste(my_work_dir,  "/", sep="")
-my_file = paste(my_file, my_data_dir, sep="")
-my_file = paste(my_file, "/Articles_NoZeroTerms.RData", sep="")
-
-#Load files
+my_LDAWinner_file = paste(my_LDAWinner_file, "/LDAModel.RData", sep="")
+my_doctopicdist_file = paste(my_work_dir,  "/", sep="")
+my_doctopicdist_file = paste(my_doctopicdist_file, my_data_dir, sep="")
+my_doctopicdist_file = paste(my_doctopicdist_file, "/LDADocTopicDist.RData", sep="")
+load(my_doctopicdist_file)
 load(my_LDAWinner_file)
-load(my_file)
 
 #Create important arrays with descriptive names
 #Documents to topics and get top 'n' terms for each topic
-Topics = topics(LDAWinner, 1)
-Terms = terms(LDAWinner, 50)
+Topics <- apply(doc_topic_distr, 1, function(x) which.is.max (x))
+Terms = lda_model$get_top_words(LDAWinner, 50)
 
-Titles = my_articles2[,"Title"]
-Years = my_articles2[,"Date"] 
-Cites = my_articles2[, "Cites"]
-Abstracts = my_articles2[,"Abstract_clean"]
-my_articles2$Years = as.numeric(format(my_articles2$Date, "%Y"))
-Years = my_articles2$Years
+#Still in box......................................
+Titles = my_articles[,"Title"]
+Years = my_articles[,"Date"] 
+Cites = my_articles[, "Cites"]
+Abstracts = my_articles[,"Abstract_clean"]
+my_articles$Years = as.numeric(format(my_articles$Date, "%Y"))
+Years = my_articles$Years
+topics_n = lda_model$.__enclos_env__$private$n_topics
+#.....................................................
 
-topics_n = LDAWinner@k
-	
 #List top ten terms for all topics
 Terms[1:10,]
 #Study one topic (Replace by the optimal topics)
 Terms[1:10,topics_n]
 	
 #List all papers for topic 1
-my_articles2$Title[Topics==1]
-my_articles2$Abstract[Topics==1]
-my_articles2$Abstract_clean[Topics==1]
+my_articles$Title[Topics==1]
+my_articles$Abstract[Topics==1]
+my_articles$Abstract_clean[Topics==1]
   	
 #Search for hot topic
 medians = lapply(1:length(Terms[1,]), function(i) median(as.numeric(Years[Topics==i])))
@@ -85,9 +91,13 @@ Terms[1:10, Topic_age_per_topic[1:5]]#Five oldest
 Terms[1:10, Paper_count_per_topic[1:5]] #5 most popular
 unlist(Paper_counts)[Paper_count_per_topic[1:5]]# with paper counts
 
-#Trend analysis hot and cold (From master's thesis--Page 54)-----------------------------------------
+#Trend analysis hot and cold (From master's thesis of M. Ponweiser, "Latent Dirichlet allocation in R," 
+#Master's thesis, Vienna University of Economics and Business, 
+#Modified here to work with text2vec package LDA instead of topicmodels LDA
+
 years = levels(factor(unlist(Years)))
-theta = posterior(LDAWinner)$topics
+theta = doc_topic_distr
+#theta = posterior(LDAWinner)$topics
 
 #**************************************************************
 # Change the years IF some years are exlcuded from the analysis
@@ -99,13 +109,10 @@ year_limiter = Years >= 2007
 Years = Years[year_limiter]
 years = levels(factor(unlist(Years)))
 
-topics_n = LDAWinner@k
-theta = posterior(LDAWinner)$topics
+
+#theta = posterior(LDAWinner)$topics
 theta = theta[year_limiter,]
 
-#Trends table
-source ("thesis_R/C13_trends-table-year-frequencies.R")
-	  
 theta_mean_by_year_by = by(theta, (unlist(Years)), colMeans)
 theta_mean_by_year = do.call("rbind",theta_mean_by_year_by)
 colnames(theta_mean_by_year) = paste(1:topics_n)
@@ -125,11 +132,16 @@ significance_total = sapply(p_level,function(x) (theta_mean_lm_coef_sign[theta_m
 significance_neg = sapply(1:length(p_level), function(x) intersect(names(theta_mean_lm_coef_slope_neg),names(significance_total[[x]])))
 significance_pos = sapply(1:length(p_level),function(x) intersect(names(theta_mean_lm_coef_slope_pos),names(significance_total[[x]])))
 
-source ("thesis_R/C14_trends-table-significance.R")
+#source ("thesis_R/C14_trends-table-significance.R")
+source ("thesis_R/C14_trends-table-significance_no_latex.R")
+
+
 
 topics_hot = as.numeric(names(sort(theta_mean_lm_coef_slope[significance_pos[[1]]], decreasing=TRUE)))
 topics_cold = as.numeric(names(sort(theta_mean_lm_coef_slope[significance_neg[[1]]], decreasing=FALSE)))
 
+#EDIT the sourced file to get your trend lines inside the plot. 
+#Changing the *ylim* values controlling the y-scale should be enough. 
 source ("thesis_R/C16_trends-fig-five-hot-and-cold.R")
 source ("thesis_R/C16_trends-fig-five-hot-and-cold-Adjusted.R")
 

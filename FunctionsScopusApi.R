@@ -83,7 +83,7 @@ get_scopus_papers = function (query_string){
     }
     found_items_num = found_items_num - items_per_query
     start_item = start_item + items_per_query
-    print (paste("start",start_item," found ",found_items_num))
+    print (paste("fetched: ",start_item," remaining: ",found_items_num))
   }
   return_data_frame
 }
