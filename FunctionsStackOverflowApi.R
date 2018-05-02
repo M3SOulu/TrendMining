@@ -30,7 +30,8 @@ get_stackoverflow_data = function (query_string){
   content_total <- content(sample_total)
   
   #get data
-  api_url <- create_so_req_url("withbody")
+  filter_text = "withbody"
+  api_url <- create_so_req_url(filter_text)
   #Prepare the url and fetch the data
   api_url = URLencode(api_url)
 
@@ -73,7 +74,7 @@ get_stackoverflow_data = function (query_string){
           Abstract = ifelse(is.null(my_data$items[[outerloop]]$body),'',my_data$items[[outerloop]]$body),
           Views = ifelse(is.null(my_data$items[[outerloop]]$view_count),0,my_data$items[[outerloop]]$view_count),
           Answers = ifelse(is.null(my_data$items[[outerloop]]$answer_count),0,my_data$items[[outerloop]]$answer_count),
-          Cites = ifelse(is.null(my_data$items[[outerloop]]$answer_count),0,my_data$items[[outerloop]]$answer_count),
+          Cites = ifelse(is.null(my_data$items[[outerloop]]$score),0,my_data$items[[outerloop]]$score),
           Tags_n = tag_number,
           Tags = ifelse(is.null(tags),'',tags),
           Date = ifelse(is.null(date_cr), 0, as.character(date_cr)),
