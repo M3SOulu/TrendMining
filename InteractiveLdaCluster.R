@@ -8,8 +8,8 @@ library(magrittr)
 library(LDAvis)
 
 #May take a while - wait patiently
-
-draw_my_IAMap = function(my_file) {
+my_file = "my_Scopus_TSE_articles_clean_data.RData"
+#draw_my_IAMap = function(my_file) {
   
   print(paste("Interactive LDA Cluster, my_file: ", my_file))
   
@@ -25,32 +25,8 @@ draw_my_IAMap = function(my_file) {
   
   it = itoken(my_tokens)
   
-  my_stopwords = c(stopwords("english"),"able","add","also","although","app",
-                   "apps","application","applications","apply",
-                   "applied","applying","approach","arsenic","author","authors",
-                   "best","based","better","brazil","built","business",
-                   "can","case","class","classes","computer","could",
-                   "company","device","different","doesnt","drug",
-                   "early","entire","even","every",
-                   "file","find","florida","food","get","getting",
-                   "health","height","high","highly","however",
-                   "industry","insertion","insertions","introduction","know",
-                   "large","level","literature","local","making",
-                   "many","may","mice","much","naked","name","needs","new","null",
-                   "often","old","overview","paper","project","projects",
-                   "really","reading","river","run","running",
-                   "searched","seems","set",
-                   "several","similar","since","small","software",
-                   "softwaredevelopment","step","story","student","students","study","studies",
-                   "system","systems","team","teams","text","tell",
-                   "unable","update","updated","updating","usa","use","used","user","users","using",
-                   "versus","visit","vitamin","want","within","without","write","writing",
-                   "year","years","one","two","three","four","five","six","seven","eight",
-                   "nine","ten","first","second","third",
-                   "it","we","their","our","us","at","be","by","does","end","from",
-                   "have","never","see","too","way","will","which",
-                   "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",
-                   "q","r","s","t","u","v","w","x","y","z","å","ä","ö")
+  my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+  
   
   #Remove stopwords
   my_vocab <- create_vocabulary(it, stopwords=my_stopwords)
@@ -84,4 +60,4 @@ draw_my_IAMap = function(my_file) {
   }
   
   print("Finished Interactive LDA Cluster")
-}
+#}
