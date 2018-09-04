@@ -33,7 +33,7 @@ Function files that fetch the data should not need editing (FunctionsScopusApi.R
    3.6. Do interactive LDA cluster exploration. Note: you might want to have less clusters (smaller k) than what is mathematically optimal (InteractiveLdaCluster.R). As exploring hundreds of clusters in screen is not very easy. 
 
 # History
-These scripts where first developed in 2015 for both teaching and research purposes. Versions of these scripts have been used in the course Emerging Trends in Software Engineering (811600S) at the University of Oulu and in the following papers. 
+These scripts were first developed in 2015 for both teaching and research purposes. Versions of these scripts have been used in the course Emerging Trends in Software Engineering (811600S) at the University of Oulu and in the following papers. 
 
 # References
 
