@@ -16,7 +16,7 @@ Please verify that the data file exists.
 
    2.2 Do the same for GetStackOverflowData.R and GetTwitterData.R
 Function files that fetch the data should not need editing (FunctionsScopusApi.R, FunctionsStackOverflowApi.R, FunctionsTwitterApi.R)
-#TODO remove existing data files from root. Make data folder empty as well. Keep only "my_TSE_articles_dirty". 
+
 
 3. Output
 
