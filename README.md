@@ -1,4 +1,7 @@
-# TrendMining
+# Mini User Guide
+If you are a student in Emerging Trends in SE course at University of Oulu please ask more help from course assistant in the exercises. 
+In other cases you may email prof. Mika Mäntylä <mika.mantyla@oulu.fi>
+
 Scripts
 
 1. Edit and execute Initialize.R 
@@ -28,3 +31,18 @@ Function files that fetch the data should not need editing (FunctionsScopusApi.R
    3.5. Investigate the trends in the optimal LDA model (AnalyzeOptimalLdaModel.R)
 
    3.6. Do interactive LDA cluster exploration. Note: you might want to have less clusters (smaller k) than what is mathematically optimal (InteractiveLdaCluster.R). As exploring hundreds of clusters in screen is not very easy. 
+
+# History
+These scripts where first developed in 2015 for both teaching and research purposes. Versions of these scripts have been used in the course Emerging Trends in Software Engineering (811600S) at the University of Oulu and in the following papers. 
+
+# References
+
+Garousi, V., Mäntylä M. V., "Citations, research topics and active countries in software engineering: A bibliometrics study", Computer Science Review, vol 56, 2016, pp. 56-77, mikamantyla.eu/Bibliometrics%20of%20SE%20literature-Dec%2023.pdf
+
+Raulamo-Jurvanen, P., Mäntylä, M. V., Garousi, V., "Citation and Topic Analysis of the ESEM papers", in Proceedings of the 9th  International Symposium on Empirical Software Engineering and Measurement (ESEM) 2015, mikamantyla.eu/2015%20Raulama-Jurvanen%20Citation%20and%20Topic%20Analysis%20of%20the%20ESEM%20papers.pdf
+
+Mäntylä M. V, Jørgensen J., Ralph P, Erdogmus H.,  "Guest editorial for special section on success and failure in software engineering,  Empirical Software Engineering,  vol. 22, issue 5, Oct 2017, pp. 2281-2297, https://link.springer.com/article/10.1007/s10664-017-9505-5
+
+Kuutila M, Mäntylä, M. V, Claes, M., Elovainio M. "Reviewing Literature on Time Pressure in Software Engineering and Related Professions" The second International Workshop on Emotion Awareness in Software Engineering ICSE 2017 Workshop (SEmotion) - Buenos Aires, Argentina - May 21, 2017, pp. 1-6, https://arxiv.org/abs/1703.04372 
+
+Mäntylä M. V. , D. Graziotin, and M. Kuutila, “The Evolution of Sentiment Analysis-A Review of Research Topics, Venues, and Top Cited Papers,” Computer Science Review, vol. 27, Feb 2018, Pages 16-32, https://arxiv.org/abs/1612.01556 
