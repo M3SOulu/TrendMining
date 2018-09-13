@@ -1,3 +1,5 @@
+rm(list=ls())
+
 library(rstudioapi)
 
 my_work_dir = rstudioapi::getActiveDocumentContext()$path 
