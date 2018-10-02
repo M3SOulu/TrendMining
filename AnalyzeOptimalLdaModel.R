@@ -29,7 +29,7 @@ load(my_LDAWinner_file)
 #Create important arrays with descriptive names
 #Documents to topics and get top 'n' terms for each topic
 Topics <- apply(doc_topic_distr, 1, function(x) which.is.max (x))
-Terms = lda_model$get_top_words(LDAWinner, 50)
+Terms = lda_model$get_top_words(50)
 
 #Still in box......................................
 Titles = my_articles[,"Title"]
