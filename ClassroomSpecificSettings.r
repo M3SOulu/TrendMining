@@ -6,6 +6,7 @@ my_work_dir = rstudioapi::getActiveDocumentContext()$path
 
 
 my_work_dir = gsub("\\\\", "/", my_work_dir)
+my_data_dir = 'data'
 
 pathParts = strsplit(my_work_dir,'/')[[1]]
 
