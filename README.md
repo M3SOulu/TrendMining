@@ -8,6 +8,8 @@ Scripts
 - Set-up environment variables => work directory, path to GetOldTweets-java-master folder, StackOverflow API key & Scopus API key
 - Execute the file line by line (shortcut CTRL+Enter)
 
+   If you are using IT center computers, you can alternatively run ClassRoomSpecificSettings.r to create local directories for libraries, and data, to solve the network drive problems. Remember to change the API keys to the ones you have created for the sources.
+
 2. Input - Pull out data from different sources
    
    2.1. Open file GetScopusData.R and execute line by line fashion. Note in first run you need to uncomment early lines and install packages
@@ -16,7 +18,6 @@ Please verify that the data file exists.
 
    2.2 Do the same for GetStackOverflowData.R and GetTwitterData.R
 Function files that fetch the data should not need editing (FunctionsScopusApi.R, FunctionsStackOverflowApi.R, FunctionsTwitterApi.R)
-
 
 3. Output
 
@@ -31,6 +32,9 @@ Function files that fetch the data should not need editing (FunctionsScopusApi.R
    3.5. Investigate the trends in the optimal LDA model (AnalyzeOptimalLdaModel.R)
 
    3.6. Do interactive LDA cluster exploration. Note: you might want to have less clusters (smaller k) than what is mathematically optimal (InteractiveLdaCluster.R). As exploring hundreds of clusters in screen is not very easy. 
+
+Extra Point: The libraries can be installed using install.packages if they are missing.
+
 
 # History
 These scripts were first developed in 2015 for both teaching and research purposes. Versions of these scripts have been used in the course Emerging Trends in Software Engineering (811600S) at the University of Oulu and in the following papers. 
