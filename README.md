@@ -1,15 +1,26 @@
 # Demo Videos
 These demonstration videos show step-by-step execution in R and R-studio
+
 Part1 https://vimeo.com/album/5406569
+
 Part2-1 https://vimeo.com/289643133
+
 Part2-2 https://vimeo.com/289643153
+
 Part2-3 https://vimeo.com/289643210
+
 Part3 https://vimeo.com/291125623
+
 Part4-1 https://vimeo.com/292890807
+
 Part4-2 https://vimeo.com/292890926
+
 Part4-3 https://vimeo.com/292890985
+
 Part5-1 https://vimeo.com/292964640
+
 Part5-2 https://vimeo.com/292964930
+
 Part5-3 https://vimeo.com/292965195
 
 # Mini User Guide
