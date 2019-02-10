@@ -61,6 +61,7 @@ get_scopus_papers = function (query_string){
                                       PubType2 = character(found_items_num),
                                       AuthorCount = numeric(found_items_num),
                                       Authors = character(found_items_num),
+                                      AUthorIds = character(found_items_num),
                                       AffiliationCount = numeric(found_items_num),
                                       Affiliations = character(found_items_num),
                                       AffiliationCountries= character(found_items_num),
@@ -97,10 +98,13 @@ get_scopus_papers = function (query_string){
         if (is.vector(entry$`author`)){
           return_data_frame$AuthorCount[start_item+i] <- length(entry$`author`)
           str_authors <- NULL
+          srt_author_id <- NULL
           for (author in entry$`author`){
             if (is.character(author$`authname`)){str_authors <- paste (str_authors, author$`authname`, sep="|")}
+            if (is.character(author$`authid`)){srt_author_id <- paste (srt_author_id, author$`authid`, sep="|")}
           }
           if (is.character(str_authors)){return_data_frame$Authors[start_item+i] <- str_authors}
+          if (is.character(srt_author_id)){return_data_frame$AuthorIds[start_item+i] <- srt_author_id}
         }
         #Pick affiliation field contains multiple fields. 
         if (is.vector(entry$`affiliation`)){
