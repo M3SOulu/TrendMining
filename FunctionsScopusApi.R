@@ -37,7 +37,7 @@ get_scopus_papers = function (query_string){
     #http://api.elsevier.com/documentation/search/SCOPUSSearchViews.htm
     #https://api.elsevier.com/documentation/SCOPUSSearchAPI.wadl
     #https://dev.elsevier.com/guides/ScopusSearchViews.htm
-    #https://dev.elsevier.com/payloads/search/scopusSearchResp.json
+    #Scopus response https://dev.elsevier.com/payloads/search/scopusSearchResp.json
     resp = generic_elsevier_api(query=query_string, type="search", search_type="scopus", start=start_item, view="COMPLETE")
     
     if (resp$get_statement$status_code != 200) {
@@ -61,7 +61,7 @@ get_scopus_papers = function (query_string){
                                       PubType2 = character(found_items_num),
                                       AuthorCount = numeric(found_items_num),
                                       Authors = character(found_items_num),
-                                      AUthorIds = character(found_items_num),
+                                      AuthorIds = character(found_items_num),
                                       AffiliationCount = numeric(found_items_num),
                                       Affiliations = character(found_items_num),
                                       AffiliationCountries= character(found_items_num),
