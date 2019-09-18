@@ -100,8 +100,8 @@ get_scopus_papers = function (query_string){
           str_authors <- NULL
           srt_author_id <- NULL
           for (author in entry$`author`){
-            if (is.character(author$`authname`)){str_authors <- paste (str_authors, author$`authname`, sep="|")}
-            if (is.character(author$`authid`)){srt_author_id <- paste (srt_author_id, author$`authid`, sep="|")}
+            if (is.recursive(author) && is.character(author$`authname`)){str_authors <- paste (str_authors, author$`authname`, sep="|")}
+            if (is.recursive(author) && is.character(author$`authid`)){srt_author_id <- paste (srt_author_id, author$`authid`, sep="|")}
           }
           if (is.character(str_authors)){return_data_frame$Authors[start_item+i] <- str_authors}
           if (is.character(srt_author_id)){return_data_frame$AuthorIds[start_item+i] <- srt_author_id}
