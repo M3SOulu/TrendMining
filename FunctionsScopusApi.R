@@ -46,12 +46,13 @@ get_document_count = function (search_string,  year=0){#if year set will search 
 #TITLE-ABS-KEY(\"What types of defects are really discovered in code reviews\")
 
 get_scopus_papers = function (query_string){
-  
+
+  cursor_value = "*"
   first_round = TRUE
   found_items_num = 1
   start_item = 0
   items_per_query = 25
-  max_items = 5000 #Implement cursor to fix this
+  max_items = 10000
   return_data_frame = data.frame()
   error_rows <- NULL
   
@@ -60,7 +61,7 @@ get_scopus_papers = function (query_string){
     #https://api.elsevier.com/documentation/SCOPUSSearchAPI.wadl
     #https://dev.elsevier.com/guides/ScopusSearchViews.htm
     #Scopus response https://dev.elsevier.com/payloads/search/scopusSearchResp.json
-    resp = generic_elsevier_api(query=query_string, type="search", search_type="scopus", start=start_item, view="COMPLETE")
+    resp = generic_elsevier_api(query=query_string, type="search", search_type="scopus", cursor=cursor_value, view="COMPLETE")
     
     if (resp$get_statement$status_code != 200) {
       stop(paste(resp))
@@ -167,6 +168,7 @@ get_scopus_papers = function (query_string){
       }
     }
     found_items_num = found_items_num - items_per_query
+    cursor_value = resp$content$`search-results`$cursor$`@next`
     start_item = start_item + items_per_query
     print (paste("fetched: ",start_item," remaining: ",found_items_num))
   }
