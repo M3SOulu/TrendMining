@@ -52,7 +52,7 @@ get_scopus_papers = function (query_string){
   found_items_num = 1
   start_item = 0
   items_per_query = 25
-  max_items = 10000
+  max_items = 100000
   return_data_frame = data.frame()
   error_rows <- NULL
   
