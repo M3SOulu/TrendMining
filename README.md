@@ -24,7 +24,7 @@ Part5-2 https://vimeo.com/292964930
 Part5-3 https://vimeo.com/292965195
 
 # Mini User Guide
-If you are a student in Emerging Trends in SE course at University of Oulu please ask more help from course assistant in the exercises. 
+If you are a student in Next Generation Software Engineering at University of Oulu please ask more help from course assistant in the exercises. 
 In other cases you may email prof. Mika Mäntylä <mika.mantyla@oulu.fi>
 
 Scripts
@@ -62,13 +62,13 @@ Extra Point: The libraries can be installed using install.packages if they are m
 
 
 # History
-These scripts were first developed in 2015 for both teaching and research purposes. Versions of these scripts have been used in the course Emerging Trends in Software Engineering (811600S) at the University of Oulu and in the following papers. 
+These scripts were first developed in 2015 for both teaching and research purposes. Versions of these scripts have been used in the course Emerging Trends in Software Engineering (811600S) and Next Generation Software Engineering (811606S) at the University of Oulu and in the following papers. 
 
 # References
 
-Garousi, V., Mäntylä M. V., "Citations, research topics and active countries in software engineering: A bibliometrics study", Computer Science Review, vol 56, 2016, pp. 56-77, http://mikamantyla.eu/Bibliometrics%20of%20SE%20literature-Dec%2023.pdf
+Garousi, V., Mäntylä M. V., "Citations, research topics and active countries in software engineering: A bibliometrics study", Computer Science Review, vol 56, 2016, pp. 56-77, https://mmantyla.github.io/Bibliometrics%20of%20SE%20literature-Dec%2023.pdf
 
-Raulamo-Jurvanen, P., Mäntylä, M. V., Garousi, V., "Citation and Topic Analysis of the ESEM papers", in Proceedings of the 9th  International Symposium on Empirical Software Engineering and Measurement (ESEM) 2015, http://mikamantyla.eu/2015%20Raulama-Jurvanen%20Citation%20and%20Topic%20Analysis%20of%20the%20ESEM%20papers.pdf
+Raulamo-Jurvanen, P., Mäntylä, M. V., Garousi, V., "Citation and Topic Analysis of the ESEM papers", in Proceedings of the 9th  International Symposium on Empirical Software Engineering and Measurement (ESEM) 2015, https://mmantyla.github.io/2015%20Raulama-Jurvanen%20Citation%20and%20Topic%20Analysis%20of%20the%20ESEM%20papers.pdf
 
 Mäntylä M. V, Jørgensen J., Ralph P, Erdogmus H.,  "Guest editorial for special section on success and failure in software engineering,  Empirical Software Engineering,  vol. 22, issue 5, Oct 2017, pp. 2281-2297, https://link.springer.com/article/10.1007/s10664-017-9505-5
 
