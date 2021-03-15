@@ -1,7 +1,8 @@
 # Demo Videos
 These demonstration videos show step-by-step execution in R and R-studio
 
-Part1 https://vimeo.com/album/5406569
+Part1 https://vimeo.com/album/5406569 (this video talks about Initialize.R file. Currently it is better to use 
+ClassroomSpecificSettings.r file. Both will work but the latter is smarter)
 
 Part2-1 https://vimeo.com/289643133
 
