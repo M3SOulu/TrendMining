@@ -1,28 +1,16 @@
 # Demo Videos
 These demonstration videos show step-by-step execution in R and R-studio
 
-Part1 https://vimeo.com/album/5406569 (this video talks about Initialize.R file. Currently it is better to use 
+Part1 https://youtube.com/playlist?list=PLTUjKYPvVhe740QdY6nsn6vB3gJ1BQnVQ (this video talks about Initialize.R file. Currently it is better to use 
 ClassroomSpecificSettings.r file. Both will work but the latter is smarter)
 
-Part2-1 https://vimeo.com/289643133
+Part2 https://youtube.com/playlist?list=PLTUjKYPvVhe79AU7knMRBnYvloUeiEXdi
 
-Part2-2 https://vimeo.com/289643153
+Part3 https://youtu.be/sHPhu0tTjqc
 
-Part2-3 https://vimeo.com/289643210
+Part4 https://youtube.com/playlist?list=PLTUjKYPvVhe7bN6zabGnrIxd8cw1SW9sw
 
-Part3 https://vimeo.com/291125623
-
-Part4-1 https://vimeo.com/292890807
-
-Part4-2 https://vimeo.com/292890926
-
-Part4-3 https://vimeo.com/292890985
-
-Part5-1 https://vimeo.com/292964640
-
-Part5-2 https://vimeo.com/292964930
-
-Part5-3 https://vimeo.com/292965195
+Part5 https://youtube.com/playlist?list=PLTUjKYPvVhe58annfU69Bq5W54ccZKypl
 
 # Mini User Guide
 If you are a student in Next Generation Software Engineering at University of Oulu please ask more help from course assistant in the exercises. 
