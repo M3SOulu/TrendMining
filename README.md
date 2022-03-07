@@ -6,7 +6,7 @@ ClassroomSpecificSettings.r file. Both will work but the latter is smarter)
 
 Part2 https://youtube.com/playlist?list=PLTUjKYPvVhe79AU7knMRBnYvloUeiEXdi
 
-Part3 https://youtu.be/sHPhu0tTjqc
+Part3 https://youtu.be/xCRQ-1hNOzo
 
 Part4 https://youtube.com/playlist?list=PLTUjKYPvVhe7bN6zabGnrIxd8cw1SW9sw
 
