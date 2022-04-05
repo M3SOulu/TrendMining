@@ -31,7 +31,7 @@ getoldtweets_path = paste(getwd(),"/GetOldTweets-java-master", sep="")
 #** SCOPUS API KEY
 #** Set your own Scopus API key here
 #** Create an account & create your API key => <your-own-scopus-api-key>
-#** https://dev.elsevier.com/user/login
+#** https://dev.elsevier.com/ Click on " Attain API Key"
 #** Replace the next line with set_api_key("YOUR_SCOPUS_KEY_HERE")
 #** EDIT THE FOLLOWING LINE with YOUR OWN Scopus API key
 #install.packages("rscopus", dependencies = TRUE)
