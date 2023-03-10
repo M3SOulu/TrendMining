@@ -1,3 +1,7 @@
+# Python version of the scripts is now also available. 
+Note the demonstration videos only cover R and R-studio version. 
+https://github.com/M3SOulu/TrendMiningPython
+
 # Demo Videos
 These demonstration videos show step-by-step execution in R and R-studio
 
@@ -64,3 +68,6 @@ Mäntylä M. V, Jørgensen J., Ralph P, Erdogmus H.,  "Guest editorial for speci
 Kuutila M, Mäntylä, M. V, Claes, M., Elovainio M. "Reviewing Literature on Time Pressure in Software Engineering and Related Professions" The second International Workshop on Emotion Awareness in Software Engineering ICSE 2017 Workshop (SEmotion) - Buenos Aires, Argentina - May 21, 2017, pp. 1-6, https://arxiv.org/abs/1703.04372 
 
 Mäntylä M. V. , D. Graziotin, and M. Kuutila, “The Evolution of Sentiment Analysis-A Review of Research Topics, Venues, and Top Cited Papers,” Computer Science Review, vol. 27, Feb 2018, Pages 16-32, https://arxiv.org/abs/1612.01556 
+
+# Python version of the scripts is now also available. 
+https://github.com/M3SOulu/TrendMiningPython
